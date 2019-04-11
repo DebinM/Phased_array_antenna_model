@@ -1,0 +1,11 @@
+addmode;
+set("injection axis","x");
+set("x",1e-6);
+set("y",gap/2);
+set("y span",wg_width+2*gap);
+set("z",0.11e-6);
+set("z span", 2e-6);
+set("rotation offset", -input_length/2-5.5e-6-1e-6*N/2-0.5e-6);
+set("wavelength start", wl_start);
+set("wavelength stop", wl_end);
+set("mode selection", "fundamental TE mode");

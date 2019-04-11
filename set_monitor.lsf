@@ -1,0 +1,73 @@
+addprofile;
+set("name","field_profile");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y span",size_y);
+set("y",gap/2);
+set("z",wg_height/2);
+
+#far field 
+
+addpower;
+set("name","Farfield_-100nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",-100e-9);
+
+addpower;
+set("name","Farfield_-300nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",-300e-9);
+
+addpower;
+set("name","Farfield_100nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",100e-9+wg_height);
+
+addpower;
+set("name","Farfield_200nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",200e-9+wg_height);
+
+addpower;
+set("name","Farfield_300nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",300e-9+wg_height);
+
+addpower;
+set("name","Farfield_500nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",500e-9+wg_height);
+
+addpower;
+set("name","Farfield_1000nm");
+set("monitor type",7);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2);
+set("y span",size_y);
+set("z",1000e-9+wg_height);

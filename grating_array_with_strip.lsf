@@ -1,0 +1,84 @@
+addstructuregroup;
+set("name", "grating array");
+for (i = 0:1:N-1){
+	addrect;
+	set('name','slab wg');
+	set('x span',wg_length);
+	set('y span',wg_width);
+	set('z span',wg_height-depth);
+	set('y',N/2*gap-gap*i);
+	set('x min',-3*input_length/4);
+	set('x max',2e-6);
+	set(material_parameter,n_si);
+	set('z min', 0);
+	set('z max', wg_height);
+	addtogroup("grating array");
+
+	addrect;
+	set('name','output wg');
+	set('y span',wg_width);
+	set('z span',wg_height);
+	set('y',N/2*gap-gap*i);
+	set('x min',wg_length);
+	set('x max',wg_length+output_length);
+	set(material_parameter,n_si);
+	set('z min', 0);
+	set('z max', wg_height);
+
+	addrect;
+	set('name','slab wg');
+	set('x span',wg_length);
+	set('y span',wg_width);
+	set('y',N/2*gap-gap*i);
+	set('x min',2e-6);
+	set('x max',wg_length);
+	set(material_parameter,n_si);
+	set('z min', 0);
+	set('z max', wg_height-depth);
+	addtogroup("grating array");
+
+	if(depth !=0){
+		for (j = 0:1:Ng-1){
+			addrect;
+			 name = "top_layer" + num2str(j-1);
+			set('name',name);
+			set('y span',wg_width);
+			set('y',N/2*gap-gap*i);
+			set('x min',2e-6+period*(1-duty_cycle)+period*(j-1));
+			set('x max',2e-6+period+period*(j-1));
+			set(material_parameter,n_si);
+			set('z min', wg_height-depth);
+			set('z max', wg_height);
+			addtogroup("grating array");
+		}
+	}
+	
+	if(N_strip !=0){
+		for(p = 0:1:N_strip-1){
+			addrect;
+			set('name','strip array');
+			set('x min',2e-6-period);
+			set('x max',2e-6+period+period*(Ng-2));
+			set('y max', N/2*gap-gap*i-wg_width/2-gap_strip-(gap_strip+Strip_width)*p);
+			set('y min', N/2*gap-gap*i-wg_width/2-gap_strip-Strip_width-(gap_strip+Strip_width)*p);
+			set('z min', 0);
+			set('z max', wg_height);
+			set(material_parameter,n_si);
+			addtogroup("grating array");
+		}
+	}
+}
+if(N_strip !=0){
+		for(p = 0:1:N_strip-1){
+			addrect;
+			set('name','strip array');
+			set('x min',2e-6-period);
+			set('x max',2e-6+period+period*(Ng-2));
+			set('y max', N/2*gap+gap-wg_width/2-gap_strip-(gap_strip+Strip_width)*p);
+			set('y min', N/2*gap+gap-wg_width/2-gap_strip-Strip_width-(gap_strip+Strip_width)*p);
+			set('z min', 0);
+			set('z max', wg_height);
+			set(material_parameter,n_si);
+			addtogroup("grating array");
+		}
+		}

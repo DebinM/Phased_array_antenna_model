@@ -1,0 +1,25 @@
+#Cladding
+addrect;
+set('name','bottom cladding');
+set('y span',w_clad);
+set('y',gap/2);
+set('x min',-input_length/2-6e-6-1e-6*(N-1));
+set('x max',wg_length+output_length+5e-6);
+set(material_parameter, n_clad);
+set('z min', -cladding_height);
+set('alpha',0.5);
+set('z max', 0);
+
+addrect;
+set('name','top cladding');
+set('y span',w_clad);
+set('y',gap/2);
+set('x min',-input_length/2-6e-6-1e-6*(N-1));
+set('x max',wg_length+output_length+5e-6);
+set('index',1);
+set('z min', 0);
+set('alpha',0.3);
+set('z max', cladding_height_top);
+set('override mesh order from material database',1);
+set('mesh order',4);
+set('index', 1);

@@ -1,0 +1,39 @@
+addpower;
+set("name","Top_Side_profile");
+set("monitor type",6);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2-size_y/2);
+set("z min", -cladding_height/2);
+set("z max", Region_height);
+addtogroup("monitor");
+
+addpower;
+set("name","Bottom_Side_profile");
+set("monitor type",6);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x min", 0);
+set("x max", wg_length+1.5e-6);
+set("y",gap/2+size_y/2);
+set("z min", -cladding_height/2);
+set("z max", Region_height);
+addtogroup("monitor");
+
+addpower;
+set("name","Back_reflection monitor");
+set("monitor type",5);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x", 0);
+set("y span",size_y);
+set("y",gap/2);
+set("z min", -cladding_height/2);
+set("z max", Region_height);
+addtogroup("monitor");
+
+addpower;
+set("name","Transmission_monitor");
+set("monitor type",5);  # 1 = point, 2 = linear x, 3 = linear y, 4 = linear z, 5 = 2D x-normal, 6 = 2D y-normal, 7 = 2D z-normal, 8 = 3D
+set("x", wg_length+1.5e-6);
+set("y span",size_y);
+set("y",gap/2);
+set("z min", -cladding_height/2);
+set("z max", Region_height);
+addtogroup("monitor");

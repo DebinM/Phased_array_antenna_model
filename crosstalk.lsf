@@ -1,0 +1,14 @@
+addanalysisgroup;
+set("name","crosstalk measurement");
+for (i = 0:N-1){
+    for (j = 0:Ng-1){
+        addpower;
+        set("name", "Slice_"+num2str(i+1)+","+num2str(j+1));
+        set("monitor type", 5);
+        set("y span",gap);
+        set("z span",wg_height+0.25e-6);
+        set("x", 2e-6+period*(1-duty_cycle)+period*(j-1)+period*duty_cycle/2);
+        set("y",N/2*gap-gap*i);
+		addtogroup("crosstalk measurement");
+    } 
+}

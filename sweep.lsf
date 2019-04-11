@@ -1,0 +1,11 @@
+# Parameter sweeping
+angle_range = linspace(-180, 180, 13);
+
+for(i=1:length(angle_range)){
+  # save the simulation and add to the job queue
+  f_name = num2str(i);
+  addjob(f_name);
+}
+
+# Run all jobs in queue
+runjobs;

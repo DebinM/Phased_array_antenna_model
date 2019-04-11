@@ -1,0 +1,11 @@
+for (i = 0:1:N-1){
+    addrect;
+    set("name", "Gratingoffset_"+num2str(i+1));
+    set("x span", 1e-6);
+    set("y span", wg_width);
+    set('z min', 0);
+	set('z max', wg_height);
+    set("x", -input_length/2-5.5e-6-1e-6*i);
+    set("y",N/2*gap-gap*i);
+    set(material_parameter, n_si);
+}	

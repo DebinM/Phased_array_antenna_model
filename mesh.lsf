@@ -1,0 +1,44 @@
+addgroup;
+set("name","mesh");
+addmesh;
+set('name','mesh_strip_first_one');
+set('x min',-3*input_length/4);
+set('x max',wg_length+output_length);
+set('y max', N/2*gap-wg_width/2+gap);
+set('y min', N/2*gap+wg_width/2);
+set('z min', 0);
+set('z max', wg_height);
+set("set equivalent index",1);
+set("override y mesh",1);
+set("equivalent y index",20);
+addtogroup("mesh");
+
+
+for (i = 0:1:N-1){
+addmesh;
+set('name','mesh_strip'+num2str(i));
+set('x min',-3*input_length/4);
+set('x max',wg_length+output_length);
+set('y max', N/2*gap-gap*i-wg_width/2);
+set('y min', N/2*gap-gap*i+wg_width/2-gap);
+set('z min', 0);
+set('z max', wg_height);
+set("set equivalent index", 1);
+set("override y mesh", 1);
+set("equivalent y index", 20);
+addtogroup("mesh");
+
+addmesh;
+set('name','mesh_wg_'+num2str(i));
+set('y span',wg_width);
+set('y',N/2*gap-gap*i);
+set('x min',-3*input_length/4);
+set('x max',wg_length+output_length);
+set("z min",0);
+set("z max",wg_height);
+set("set equivalent index", 1);
+set("override z mesh", 1);
+set("equivalent z index", 10);
+addtogroup("mesh");
+}
+

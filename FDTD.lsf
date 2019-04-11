@@ -1,0 +1,10 @@
+addfdtd;
+set("dimension",2);
+set("x min", 0);
+set("x max", wg_length+3e-6);
+set("y span",size_y);
+set("y",gap/2);
+set("z min", -cladding_height/2);
+set("z max", Region_height);
+set("simulation time", 6000e-15);
+set("background index", 1);
