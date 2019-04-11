@@ -1,0 +1,146 @@
+#############################################################################
+# Scriptfile: phased_array_antenna_paramter.lsf  
+#
+# Description:
+# This script sets up parameters required for the phased_array_antenna 
+# 
+##############################################################################
+#For the sweep function, you can uncomment the for loop to make it work.
+angle_range = linspace(-180, 180, 13);
+strip_sweep = linspace(10, 80, 8);
+
+# choose the mode: 1 is angle sweeping 
+# 0 is strip width sweeping
+choice_mode = 1;
+if (choice_mode == 1){
+    var_sweeping = angle_range;
+    }
+else {
+    var_sweeping = strip_sweep;
+    }
+for (k=1:length(var_sweeping)){
+	switchtolayout;
+	selectall;
+	delete;
+	## GRATING PARAMS
+	#Define grating element
+	if (choice_mode == 1){
+	    phase_diff = var_sweeping(k);
+	    # keep the strip width as a constant value
+	    Strip_width = 50*1e-9;
+            }
+            else {
+                # keep the phase angle as a constant value
+                phase_diff = 0;
+                Strip_width = var_sweeping(k);
+            }
+	phase_diff = angle_range(k);
+	#phase_diff = 0;
+	period = 670e-9;  #grating period
+	depth = 15e-9;    #grating depth
+	wg_height = 220e-9; #waveguide height
+	wg_length =50e-6;  #waveguide_length
+	duty_cycle = 0.5;  #grating duty cycle
+	input_length = 5e-6;  #input waveguide length
+	output_length = 8e-6; #output waveguide length
+	wg_width = 450e-9; #grating width
+	cladding_height = 8e-6;  #bottom cladding height
+	cladding_height_top = 9e-6; #top cladding height
+	
+	#define material type
+	material_parameter = 'material'; #material type(input index or material)
+	?material_parameter;
+	if(material_parameter == 'material')
+	{
+	n_si = 'Si (Silicon) - Palik';
+	n_clad = 'SiO2 (Glass) - Palik';
+	#if you want air cladding or sio2 cladding change it in the model directly
+	}
+	else if(material_parameter == 'index')
+	{
+	n_si = 3.47;
+	n_clad = 1.444;
+	#if you want air cladding or sio2 cladding change it in the model directly
+	}
+	else
+	{
+		?'please input a correct value';
+		break;
+	}
+	#ARRAY PARAMS
+	N = 8; #grating number
+	gap = 775e-9; #gap center to center
+	N_strip = 0; # number of strip
+	#filling_factor = 0.5; # the filling factor of strip
+	#if(filling_factor>1 |filling_factor<0)
+	#{
+	#break;
+	#}
+	#Strip_width = (gap-wg_width)/(N_strip+1-filling_factor)*filling_factor; # the width of the strip
+	w_clad = gap*N + wg_width +20e-6; # the width of the cladding
+	l_total = wg_length + input_length+output_length+10e-6; #the total length of the grating
+	Ng = floor(wg_length/period); #number of grating period
+	gap_strip = (gap-wg_width-N_strip*Strip_width)/(N_strip+1);
+
+	## SIM PARAMS
+	#SIMULATION TYPE
+	simulation_type = 'array'; #simulation tyep can either be 'single' or 'array'
+
+	#input source
+	wl_start =1.55e-6; #start wavelength
+	wl_end = 1.55e-6;  #end wavelength
+	#offset_length = -1e-6-input_length*7/8; #offset setting for input source
+
+	#FDTD setting
+	Region_height = cladding_height_top-2e-6;
+	size_x=wg_length + 6e-6;
+	size_y= w_clad - 20e-6+5e-6;
+	mesh_x=20e-9;
+	mesh_y=20e-9;
+	finer_mesh_size=2.5e-6;
+	FDTD;
+	if(mod(N,2) == 1)
+	{
+		if(simulation_type =='single')
+		{
+			source_odd;
+		}
+		else if(simulation_type =='array')
+		{
+			array_odd;
+		}
+		else{
+			?"read the annotation please!!!!!!";
+			break;
+		}
+	}
+	else
+	{
+		if(simulation_type =='single')
+		{
+			source_even;
+		}
+		else if(simulation_type =='array')
+		{
+			array_even;
+		}
+		else{
+			?"read the annotation please!!!!!!";
+			break;
+		}
+	}
+	grating_array_with_strip;
+	set_monitor;
+	set_offset;
+	cladding;
+	#side_monitor;
+	#crosstalk;
+	#mesh;
+            if (choice_mode == 1){
+	    f_name = num2str(phase_diff) + '.fsp';
+            }
+            else {
+                f_name = num2str(phase_diff) + 'nm strip width sweep.fsp';
+            }
+	save(f_name);
+}

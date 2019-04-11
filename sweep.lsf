@@ -1,9 +1,17 @@
 # Parameter sweeping
 angle_range = linspace(-180, 180, 13);
+strip_width = linspace(10, 80, 8);
+mode_choice = 1;
+if (mode_choice == 1){
+	var = angle_range;
+}
+else {
+	var = strip_width;
+}
 
-for(i=1:length(angle_range)){
+for(i=1:length(var)){
   # save the simulation and add to the job queue
-  f_name = num2str(i);
+  f_name = num2str(var(i));
   addjob(f_name);
 }
 
